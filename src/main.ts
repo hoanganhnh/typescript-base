@@ -22,7 +22,7 @@ interface DescribableFunction {
 function doSomething(fn: DescribableFunction) {
     console.log(fn.description + ' returned ' + fn(6));
 }
-
+// Function Overloads
 function makeDate(timestamp: number): Date;
 function makeDate(m: number, d: number, y: number): Date;
 function makeDate(mOrTimestamp: number, d?: number, y?: number): Date {
@@ -34,3 +34,26 @@ function makeDate(mOrTimestamp: number, d?: number, y?: number): Date {
 }
 const d1 = makeDate(12345678);
 const d2 = makeDate(5, 5, 5);
+
+//  Index Signatures
+interface NumberDictionary {
+    [index: string]: number | string;
+
+    length: number; // ok
+    name: string;
+}
+
+interface StringArray {
+    [index: number]: string;
+}
+
+const arr: StringArray = ['A', 'B'];
+
+console.log(arr[0]);
+
+// Generic
+interface Box<Type> {
+    contents: Type;
+}
+
+const box: Box<string> = {contents: 'hello'};
