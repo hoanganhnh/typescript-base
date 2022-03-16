@@ -1,3 +1,4 @@
+/* eslint-disable no-redeclare */
 function greet(person: any, date: Date) {
     console.log(`Hello ${person}, today is ${date.toDateString()}!`);
 }
@@ -8,8 +9,9 @@ function liveDangerously(x?: number | null) {
     console.log(x!.toFixed());
 }
 
+// eslint-disable-next-line symbol-description
 const sym = Symbol();
-let obj = {
+const obj = {
     [sym]: 'value',
 };
 console.log(obj[sym]);
@@ -20,7 +22,7 @@ interface DescribableFunction {
 }
 
 function doSomething(fn: DescribableFunction) {
-    console.log(fn.description + ' returned ' + fn(6));
+    console.log(`${fn.description} returned ${fn(6)}`);
 }
 // Function Overloads
 function makeDate(timestamp: number): Date;
@@ -28,9 +30,8 @@ function makeDate(m: number, d: number, y: number): Date;
 function makeDate(mOrTimestamp: number, d?: number, y?: number): Date {
     if (d !== undefined && y !== undefined) {
         return new Date(y, mOrTimestamp, d);
-    } else {
-        return new Date(mOrTimestamp);
     }
+    return new Date(mOrTimestamp);
 }
 const d1 = makeDate(12345678);
 const d2 = makeDate(5, 5, 5);
@@ -56,4 +57,14 @@ interface Box<Type> {
     contents: Type;
 }
 
-const box: Box<string> = {contents: 'hello'};
+const box: Box<string> = {
+    contents: 'Hello',
+};
+
+const objs: any = {
+    a: 'string',
+};
+
+const a = 1;
+
+console.log({ a });
