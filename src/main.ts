@@ -1,4 +1,5 @@
 /* eslint-disable no-redeclare */
+/* eslint-disable max-classes-per-file */
 function greet(person: any, date: Date) {
     console.log(`Hello ${person}, today is ${date.toDateString()}!`);
 }
@@ -68,3 +69,35 @@ const objs: any = {
 const a = 1;
 
 console.log({ a });
+
+interface GenericIdentityFn {
+    <Type>(arg: Type): Type;
+}
+
+function identity<Type>(arg: Type): Type {
+    return arg;
+}
+
+const myIdentity: GenericIdentityFn = identity;
+
+class GenericNumber<NumType> {
+    zeroValue: NumType | undefined;
+
+    add: ((x: NumType, y: NumType) => NumType) | undefined;
+}
+
+const myGenericNumber = new GenericNumber<number>();
+myGenericNumber.zeroValue = 0;
+myGenericNumber.add = (x, y) => x + y;
+
+function getProperty<T, K extends keyof T>(smt: T, key: K) {
+    return smt[key];
+}
+const x = {
+    a: 1,
+    b: 2,
+    c: 3,
+    d: 4,
+};
+
+getProperty(x, 'd');
